@@ -119,7 +119,7 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
 
                     widget.onDone(_filter?.name ?? "_");
 
-                    Navigator.pop(context, {'image_filtered':imageFile} );
+                    // Navigator.pop(context, {'image_filtered':imageFile} );
                   },
                 )
         ],
