@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
+import 'dart:'
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -238,7 +240,10 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    return File('$filename');
+    var now = new DateTime.now();
+    var gen = Random();
+    String name = "${now.year.toString()}${now.month.toString()}${now.day.toString()}_${gen.nextInt(99909999).toString()}.jpg";
+    return File('$path/$name');
   }
 
   Future<File> saveFilteredImage() async {
