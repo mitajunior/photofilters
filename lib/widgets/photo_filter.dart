@@ -60,6 +60,7 @@ class PhotoFilterSelector extends StatefulWidget {
   final BoxFit fit;
   final String filename;
   final bool circleShape;
+  final Function onDone;
 
   const PhotoFilterSelector({
     Key key,
@@ -70,6 +71,7 @@ class PhotoFilterSelector extends StatefulWidget {
     this.fit = BoxFit.fill,
     @required this.filename,
     this.circleShape = false,
+    @required this.onDone
   }) : super(key: key);
 
   @override
@@ -114,7 +116,9 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                     });
                     var imageFile = await saveFilteredImage();
 
-                    Navigator.pop(context, {'image_filtered':imageFile} );
+                    widget.onDone(imageFile);
+
+                    // Navigator.pop(context, {'image_filtered':imageFile} );
                   },
                 )
         ],
