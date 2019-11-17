@@ -114,10 +114,11 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                     // setState(() {
                     //   loading = true;
                     // });
-                    // var imageFile = await saveFilteredImage();
                     print("Getting filtered image, relax");
-                    widget.onDone(_filter?.name ?? "_");
-                    print(cachedFilters[_filter?.name ?? "_"]);
+                    var imageFile = await saveFilteredImage();
+
+                    // widget.onDone(_filter?.name ?? "_");
+
 
                     // Navigator.pop(context, {'image_filtered':imageFile} );
                   },
@@ -237,12 +238,14 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    return File('$path/filtered_${_filter?.name ?? "_"}_$filename');
+    return File('$path/ ${_filter?.name ?? "_"}_$filename');
   }
 
   Future<File> saveFilteredImage() async {
     var imageFile = await _localFile;
+    print('File got');
     await imageFile.writeAsBytes(cachedFilters[_filter?.name ?? "_"]);
+    print('File written');
     return imageFile;
   }
 
