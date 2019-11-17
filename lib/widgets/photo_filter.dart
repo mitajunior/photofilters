@@ -114,10 +114,10 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                     // setState(() {
                     //   loading = true;
                     // });
-                    var imageFile = await saveFilteredImage();
-                    // print("File saved");
+                    // var imageFile = await saveFilteredImage();
 
-                    // widget.onDone(imageFile);
+
+                    widget.onDone(_filter?.name ?? "_");
 
                     Navigator.pop(context, {'image_filtered':imageFile} );
                   },
