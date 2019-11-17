@@ -2,6 +2,10 @@
 
 A flutter package for iOS and Android for applying filter to an image. A set of preset filters are also available. You can create your own filters too.
 
+## Whats different?
+
+Added `onDone` property that resolves your function once filter is applied
+
 ## Installation
 
 First, add `photofilters` and `image` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
@@ -33,7 +37,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   imageLib.Image _image;
   String fileName;
-  Filter _filter;
   List<Filter> filters = presetFitersList;
 
   Future getImage() async {
@@ -61,6 +64,7 @@ class _MyAppState extends State<MyApp> {
                 filters: presetFitersList,
                 filename: fileName,
                 loader: Center(child: CircularProgressIndicator()),
+                onDone: (File result) => print(result.path) //do what you want with the save image
               ),
       ),
       floatingActionButton: new FloatingActionButton(
