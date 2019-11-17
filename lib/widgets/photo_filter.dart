@@ -112,10 +112,9 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
               : IconButton(
                   icon: Icon(Icons.check),
                   onPressed: () async {
-                    setState(() {
-                      loading = true;
-                    });
-                    print("Getting filtered image, relax");
+                    // setState(() {
+                    //   loading = true;
+                    // });
                     var imageFile = await saveFilteredImage();
 
                     widget.onDone(imageFile);
