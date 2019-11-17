@@ -112,16 +112,14 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
               : IconButton(
                   icon: Icon(Icons.check),
                   onPressed: () async {
-                    // setState(() {
-                    //   loading = true;
-                    // });
+                    setState(() {
+                      loading = true;
+                    });
                     print("Getting filtered image, relax");
                     var imageFile = await saveFilteredImage();
 
-                    // widget.onDone(_filter?.name ?? "_");
-
-
-                    // Navigator.pop(context, {'image_filtered':imageFile} );
+                    widget.onDone(imageFile);
+                    Navigator.pop(context, {'image_filtered':imageFile} );
                   },
                 )
         ],
@@ -247,9 +245,7 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
 
   Future<File> saveFilteredImage() async {
     var imageFile = await _localFile;
-    print('File got');
     await imageFile.writeAsBytes(cachedFilters[_filter?.name ?? "_"]);
-    print('File written');
     return imageFile;
   }
 
