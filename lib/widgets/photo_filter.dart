@@ -63,17 +63,17 @@ class PhotoFilterSelector extends StatefulWidget {
   final bool circleShape;
   final Function onDone;
 
-  const PhotoFilterSelector({
-    Key key,
-    @required this.title,
-    @required this.filters,
-    @required this.image,
-    this.loader = const Center(child: CircularProgressIndicator()),
-    this.fit = BoxFit.fill,
-    @required this.filename,
-    this.circleShape = false,
-    @required this.onDone
-  }) : super(key: key);
+  const PhotoFilterSelector(
+      {Key key,
+      @required this.title,
+      @required this.filters,
+      @required this.image,
+      this.loader = const Center(child: CircularProgressIndicator()),
+      this.fit = BoxFit.fill,
+      @required this.filename,
+      this.circleShape = false,
+      @required this.onDone})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => new _PhotoFilterSelectorState();
@@ -95,7 +95,6 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
     image = widget.image;
   }
 
-
   @override
   void dispose() {
     super.dispose();
@@ -103,6 +102,8 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: widget.title,
@@ -131,19 +132,40 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
             : Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Expanded(
-                    flex: 6,
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      padding: EdgeInsets.all(12.0),
-                      child: _buildFilteredImage(
-                        _filter,
-                        image,
-                        filename,
+                  Container(
+                    width: size,
+                    height: size,
+                    child: ClipRect(
+                      child: OverflowBox(
+                        alignment: Alignment.center,
+                        child: FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: Container(
+                            width: size,
+                            height: size,
+                            child: _buildFilteredImage(
+                              _filter,
+                              image,
+                              filename,
+                            ), // this is my CameraPreview
+                          ),
+                        ),
                       ),
                     ),
                   ),
+                  // Expanded(
+                  //   flex: 6,
+                  //   child: Container(
+                  //     width: double.infinity,
+                  //     height: double.infinity,
+                  //     padding: EdgeInsets.all(12.0),
+                  //     child: _buildFilteredImage(
+                  //       _filter,
+                  //       image,
+                  //       filename,
+                  //     ),
+                  //   ),
+                  // ),
                   Expanded(
                     flex: 2,
                     child: Container(
@@ -169,8 +191,8 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                               ),
                             ),
                             onTap: () => setState(() {
-                                  _filter = widget.filters[index];
-                                }),
+                              _filter = widget.filters[index];
+                            }),
                           );
                         },
                       ),
@@ -238,7 +260,8 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
     final path = await _localPath;
     var now = new DateTime.now();
     var gen = Random();
-    String name = "${now.year.toString()}${now.month.toString()}${now.day.toString()}_${gen.nextInt(99909999).toString()}.jpg";
+    String name =
+        "${now.year.toString()}${now.month.toString()}${now.day.toString()}_${gen.nextInt(99909999).toString()}.jpg";
     return File('$path/$name');
   }
 
