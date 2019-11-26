@@ -133,13 +133,13 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Container(
-                    width: size,
+                    width: double.infinity,
                     height: size,
                     child: ClipRect(
                       child: OverflowBox(
                         alignment: Alignment.center,
                         child: FittedBox(
-                          fit: BoxFit.fitWidth,
+                          fit: BoxFit.cover,
                           child: Container(
                             width: size,
                             height: size,
