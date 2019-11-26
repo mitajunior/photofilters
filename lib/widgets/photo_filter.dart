@@ -134,6 +134,7 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                 children: [
                   Container(
                     width: double.infinity,
+                    margin: EdgeInsets.only(bottom: 20),
                     height: size,
                     child: ClipRect(
                       child: OverflowBox(
@@ -141,7 +142,7 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                         child: FittedBox(
                           fit: BoxFit.cover,
                           child: Container(
-                            width: size,
+                            width: double.infinity,
                             height: size,
                             child: _buildFilteredImage(
                               _filter,
@@ -186,6 +187,7 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                                   ),
                                   Text(
                                     widget.filters[index].name,
+                                    style: TextStyle(fontSize: 13),
                                   )
                                 ],
                               ),
